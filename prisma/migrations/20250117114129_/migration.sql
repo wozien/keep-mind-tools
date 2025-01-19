@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE `Task` MODIFY `done` BOOLEAN NOT NULL DEFAULT false;

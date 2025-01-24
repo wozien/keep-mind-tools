@@ -8,8 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CreateListModal } from "@/components/CreateListModal";
-import { CheckLists } from "@/components/CheckLists";
+import { Button } from "@/components/ui/button";
+import { AppList } from "@/components/AppList";
+import { MoreText } from "@/components/MoreText";
 
 async function Welcome() {
   const user = await currentUser();
@@ -23,11 +24,11 @@ async function Welcome() {
           欢迎 {user.firstName} {user.lastName}!
         </CardTitle>
         <CardDescription className="max-w-lg text-balance leading-relaxed">
-          道虽迩，不行不至；事虽小，不为不成
+          开始使用KMT，✨🤔✨定格你的灵感瞬间.
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <CreateListModal />
+        <Button>开始使用</Button>
       </CardFooter>
     </Card>
   );
@@ -37,15 +38,15 @@ function WelcomeFallback() {
   return <Skeleton className="h-[180px] w-full" />;
 }
 
-export default function HomePage() {
+export default function Page() {
   return (
     <main className="flex w-full flex-col items-center px-4">
       <Suspense fallback={<WelcomeFallback />}>
         <Welcome />
       </Suspense>
-      <Suspense fallback={<WelcomeFallback />}>
-        <CheckLists />
-      </Suspense>
+
+      <AppList />
+      <MoreText />
     </main>
   );
 }

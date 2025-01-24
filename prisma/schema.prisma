@@ -6,29 +6,23 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
+    provider = "mysql"
     url      = env("DATABASE_URL")
 }
 
-model List {
-    id        Int      @id @default(autoincrement())
-    name      String
-    userId    String
-    color     String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    tasks Task[]
+enum TodoDifficulty {
+    EASY
+    NORMAL
+    HARD
 }
 
-model Task {
-    id        Int       @id @default(autoincrement())
-    content   String
-    userId    String
-    done      Boolean   @default(false)
-    createdAt DateTime  @default(now())
-    expiresAt DateTime?
-
-    ListId Int
-    list   List @relation(fields: [ListId], references: [id], onDelete: Cascade)
+model TodoList {
+    id         Int            @id @default(autoincrement())
+    content    String
+    userId     String
+    done       Boolean        @default(false)
+    difficulty TodoDifficulty @default(EASY)
+    expireAt   DateTime?
+    createdAt  DateTime       @default(now())
+    updatedAt  DateTime       @updatedAt
 }

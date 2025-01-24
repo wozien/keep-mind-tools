@@ -9,8 +9,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { GeistSans } from "geist/font/sans";
 
 export const metadata: Metadata = {
-  title: "待办清单",
-  description: "My todo list",
+  title: "KMT | Keep Mind Tools",
+  description: "✨🤔✨ome simple tools to capture your inspirational moments.",
   icons: [{ rel: "icon", url: "/logo.svg" }],
 };
 

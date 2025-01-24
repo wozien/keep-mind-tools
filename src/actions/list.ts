@@ -1,21 +1,21 @@
 "use server";
 
 import {
-  createListZodSchema,
-  type CreateListZodSchemaType,
-} from "@/schema/createList";
+  todoListZodSchema,
+  type TodoListZodSchemaType,
+} from "@/schema/todolist";
 import { currentUser } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 
-export async function createListAction(data: CreateListZodSchemaType) {
+export async function createListAction(data: TodoListZodSchemaType) {
   const user = await currentUser();
 
   if (!user) {
     throw new Error("用户未登录，请先登录");
   }
 
-  const result = createListZodSchema.safeParse(data);
+  const result = todoListZodSchema.safeParse(data);
 
   if (!result.success) {
     return {
@@ -25,15 +25,16 @@ export async function createListAction(data: CreateListZodSchemaType) {
   }
 
   // 数据库处理
-  await db.list.create({
+  await db.todoList.create({
     data: {
       userId: user.id,
-      name: data.name,
-      color: data.color,
+      content: data.content,
+      difficulty: data.difficulty,
+      expireAt: data.expireAt,
     },
   });
 
-  revalidatePath("/");
+  revalidatePath("/todolist");
 
   return {
     success: true,
@@ -48,12 +49,32 @@ export async function deleteListAction(id: number) {
     throw new Error("用户未登录，请先登录");
   }
 
-  await db.list.delete({
+  await db.todoList.delete({
     where: {
       id,
       userId: user.id,
     },
   });
 
-  revalidatePath("/");
+  revalidatePath("/todolist");
+}
+
+export async function setListDoneAction(id: number, done: boolean) {
+  const user = await currentUser();
+
+  if (!user) {
+    throw new Error("用户未登录，请先登录");
+  }
+
+  await db.todoList.update({
+    where: {
+      id,
+      userId: user.id,
+    },
+    data: {
+      done,
+    },
+  });
+
+  revalidatePath("/todolist");
 }

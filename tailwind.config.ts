@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
+import colors, { green, orange } from "tailwindcss/colors";
 
 export default {
   darkMode: ["class"],
@@ -59,5 +60,6 @@ export default {
       },
     },
   },
+  safelist: [],
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

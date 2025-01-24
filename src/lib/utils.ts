@@ -9,6 +9,8 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getCurApp(key: string) {
   return appList.find(
-    (app) => app.key === key || (key.startsWith("/") && key === app.pathname),
+    (app) =>
+      (app.key as string) === key ||
+      (key.startsWith("/") && key === app.pathname),
   );
 }

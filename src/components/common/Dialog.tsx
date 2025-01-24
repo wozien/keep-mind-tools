@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
+import type { DialogProps } from "@radix-ui/react-dialog";
 import {
   Dialog as DialogRoot,
   DialogContent,
@@ -12,7 +12,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 
-export type ComposeDialogProps = DialogPrimitive.DialogProps & {
+export type ComposeDialogProps = DialogProps & {
   trigger: React.ReactNode;
   title: string | React.ReactNode;
   description?: string | React.ReactNode;

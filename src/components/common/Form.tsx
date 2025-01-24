@@ -9,11 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import type {
-  FormProviderProps,
-  ControllerRenderProps,
-  FieldValues,
-} from "react-hook-form";
+import type { FormProviderProps, ControllerRenderProps } from "react-hook-form";
 
 type FieldConfig = {
   name: string;

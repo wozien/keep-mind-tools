@@ -22,7 +22,7 @@ function CheckListItem({ item }: { item: TodoList }) {
         title: "操作成功",
         description: "清单已经删除",
       });
-    } catch (e) {
+    } catch {
       toast({
         title: "操作失败",
         description: "清单删除失败，请稍后重试",
@@ -34,7 +34,7 @@ function CheckListItem({ item }: { item: TodoList }) {
   const onCheckedChange = async (checked: boolean) => {
     try {
       await setListDoneAction(item.id, checked);
-    } catch (e) {
+    } catch {
       toast({
         title: "操作失败",
         variant: "destructive",

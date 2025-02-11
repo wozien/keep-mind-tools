@@ -32,13 +32,9 @@ export const appList = [
 ];
 
 export const TodoDifficultyMap = new Map([
-  [
-    TodoDifficulty["EASY"],
-    ["轻松", "bg-green-100 border-green-500 text-green-500"],
-  ],
-  [
-    TodoDifficulty["NORMAL"],
-    ["正常", "bg-orange-100 border-orange-500 text-orange-500"],
-  ],
-  [TodoDifficulty["HARD"], ["困难", "bg-red-100 border-red-500 text-red-500"]],
+  [TodoDifficulty["EASY"], ["轻松", "bg-green-100 text-green-500"]],
+  [TodoDifficulty["NORMAL"], ["正常", "bg-orange-100 text-orange-500"]],
+  [TodoDifficulty["HARD"], ["困难", "bg-red-100 text-red-500"]],
 ]);
+
+export type TodoListStatus = "doing" | "done" | "all";

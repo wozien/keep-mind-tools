@@ -14,7 +14,10 @@ export const DifficultyBadge: React.FC<DifficultyBadgeProps> = ({ diff }) => {
   const colorClass = diffCfg?.[1];
 
   return (
-    <Badge variant="outline" className={cn("px-4 py-1 text-xs", colorClass)}>
+    <Badge
+      variant="outline"
+      className={cn("border-none px-4 py-1 text-xs", colorClass)}
+    >
       {diffCfg?.[0]}
     </Badge>
   );

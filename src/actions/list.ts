@@ -59,6 +59,11 @@ export async function deleteListAction(id: number) {
   revalidatePath("/todolist");
 }
 
+/**
+ * 设置待办事项的完成状态
+ * @param id 待办事项ID
+ * @param done 完成状态
+ */
 export async function setListDoneAction(id: number, done: boolean) {
   const user = await currentUser();
 

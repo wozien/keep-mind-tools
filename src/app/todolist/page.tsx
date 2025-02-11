@@ -4,6 +4,7 @@ import { CheckList } from "@/components/todolist/CheckList";
 import { CheckListHeader } from "@/components/todolist/CheckListHeader";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
+import type { TodoListStatus } from "@/lib/const";
 
 function SkeletonFallback() {
   return (
@@ -14,12 +15,23 @@ function SkeletonFallback() {
   );
 }
 
-export default async function TodoLisPage() {
+export default async function TodoLisPage({
+  searchParams,
+}: {
+  searchParams: Promise<{
+    status?: TodoListStatus;
+    expireTime?: string;
+  }>;
+}) {
+  const status = (await searchParams)?.status ?? "doing";
+  const expireTime = (await searchParams)?.expireTime;
   const user = await currentUser();
 
   const list = await db.todoList.findMany({
     where: {
       userId: user?.id,
+      done: status === "done" ? true : status === "doing" ? false : undefined,
+      expireAt: expireTime ? new Date(+expireTime) : undefined,
     },
   });
 
